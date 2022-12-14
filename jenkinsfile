@@ -6,7 +6,7 @@
         {
             steps
             {
-                git 'https://github.com/Devopsad4/Maven.git'
+                git 'https://github.com/Devopsad4/jio.git'
             }
         }
         stage('Continuous Build')
