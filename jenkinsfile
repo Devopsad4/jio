@@ -2,7 +2,7 @@
     agent any
     stages
     {
-        stage('Continuous Download')
+        stage('COntinuous Download')
         {
             steps
             {
