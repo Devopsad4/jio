@@ -1,0 +1,48 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('Continuous Downloads')
+        {
+            steps
+            {
+                git 'https://github.com/Devopsad4/Maven.git'
+            }
+        }
+        stage('Continuous Build')
+        {
+            steps
+            {
+                sh 'mvn package'
+            }
+        }
+        stage('Continuous Deploy')
+        {
+            steps
+            {
+                sh 'scp /home/ubuntu/.jenkins/workspace/decarative/webapp/target/webapp.war ubuntu@172.31.21.155:/var/lib/tomcat9/webapps/testapp.war'
+            }
+        }
+        stage('Continuous Testing')
+        {
+            steps
+            {
+                git 'https://github.com/Devopsad4/FunctionTesting.git'
+                sh 'java -jar /home/ubuntu/.jenkins/workspace/decarative/testing.jar'
+            }
+        }
+        stage('Continuous Delivery')
+        {
+            steps
+            {
+                sh 'scp /home/ubuntu/.jenkins/workspace/decarative/webapp/target/webapp.war ubuntu@172.31.18.110:/var/lib/tomcat9/webapps/prodapp.war'
+            }
+        }
+        
+        
+        
+        
+    }
+    
+}
